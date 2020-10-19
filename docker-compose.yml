@@ -1,0 +1,31 @@
+version: '3.7'
+
+services:
+
+    
+    web:
+
+        build: .
+        command: python /hacker-moon-video/__init__.py
+        volumes:
+
+          - .:/hacker-moon-video
+
+        ports:
+
+          - 8080:8080
+
+        depends_on:
+            - db
+
+    db:
+        image: postgres:11
+
+        environment:
+            - "POSTGRES_HOST_AUTH_METHOD=trust"    
+        volumes:
+            - postgres_data:/var/lib/postgresql/data/
+
+volumes:
+    postgres_data:
+        
