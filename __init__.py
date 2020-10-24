@@ -3,6 +3,9 @@ from core.upload.routes import upload
 from core.view.routes import view
 from core.db import init_pg
 from core.db import close_pg
+import logging
+
+
 
 async def make_app():
     app = web.Application()
@@ -12,6 +15,11 @@ async def make_app():
 
     app.on_startup.append(init_pg)
     app.on_cleanup.append(close_pg)
+
+    logging.basicConfig(
+        level=logging.DEBUG,
+        format='%(name)s - %(levelname)s - %(message)s',
+    )
 
     return app
 
