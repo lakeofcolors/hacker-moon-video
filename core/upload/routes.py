@@ -24,6 +24,10 @@ async def upload_video(request: web.Request) -> web.Response:
 
 
     async with request.app['db'].acquire() as conn:
-        command = video.insert().values(user_id=1,video_title='New video',video_description='Description')
-        await conn.execute(command)
+            await create_video(
+                conn,
+                user_id=1,
+                video_description='Some',
+                video_title="Title some video",
+            )
     return web.Response(status = 200)

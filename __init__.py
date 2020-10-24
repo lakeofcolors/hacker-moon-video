@@ -1,5 +1,6 @@
 from aiohttp import web
 from core.upload.routes import upload
+from core.view.routes import view
 from core.db import init_pg
 from core.db import close_pg
 
@@ -7,6 +8,7 @@ async def make_app():
     app = web.Application()
 
     app.add_routes(upload)
+    app.add_routes(view)
 
     app.on_startup.append(init_pg)
     app.on_cleanup.append(close_pg)
