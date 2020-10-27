@@ -4,7 +4,7 @@ from core.view.routes import view
 from core.db import init_pg
 from core.db import close_pg
 import logging
-
+import aiohttp_cors
 
 
 async def make_app():
@@ -15,6 +15,8 @@ async def make_app():
 
     app.on_startup.append(init_pg)
     app.on_cleanup.append(close_pg)
+
+    cors = aiohttp_cors.setup(app)
 
     logging.basicConfig(
         level=logging.DEBUG,
